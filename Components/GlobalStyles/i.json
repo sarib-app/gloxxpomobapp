@@ -1,0 +1,22 @@
+[
+    {
+        "product": {
+            "id": 11941,
+            "title": "花生碎颗粒",
+            "picture": "http://qiniu.aiwan88.net/20220727165358338.jpg",
+            "channels": "67841,67842,67691,67709,67710",
+            "cate_id": 0,
+            "cate_title": "",
+            "state": 0,
+            "gid": 74635,
+            "desc": "12345678",
+            "price": 1
+        },
+        "quantity": 2,
+        "totalPrice": 2,
+        "addOns": {
+            "sugar": false,
+            "brownSugar": false
+        }
+    }
+]

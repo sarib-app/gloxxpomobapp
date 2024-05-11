@@ -1,0 +1,26 @@
+{
+    "colors": {
+        "Eye_color": "Light (possibly blue or grey)",
+        "Hair_color": "Blonde"
+    },
+    "created_at": "2024-05-02 20:35:55",
+    "face_shape": "oval",
+    "id": 1,
+    "rating": {
+        "Face_shape_rating": 90,
+        "Facial_structure_rating": 85,
+        "HairStyle_rating": 98,
+        "Skin_Quality_rating": 95
+    },
+    "recommendation": {
+        "Face_shape_defination": "The face shape appears to be oval, with forehead, cheekbones, and jawline tapering gently.",
+        "Facial_structure_defination": "Prominent cheekbones and well-proportioned features contributing to a harmonious face.",
+        "HairStyle_defination": "Short, curly hair that appears healthy with no visible signs of thinning.",
+        "Skin_Quality_defination": "Skin looks generally clear and smooth without visible roughness or burns."
+    },
+    "scan": "1",
+    "total_score": "92",
+    "updated_at": "2024-05-02 20:35:55",
+    "user_id": "4",
+    "username": "Affan Sheikh"
+}
