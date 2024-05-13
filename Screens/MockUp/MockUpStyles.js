@@ -3,7 +3,7 @@ import {
     Dimensions
 } from 'react-native'
 import Colors from '../../Components/GlobalStyles/colors';
-const WindowWidth = Dimensions.get('screen').width
+const WindowWidth = Dimensions.get('window').width
 const WindowHeight = Dimensions.get('window').height;
 const MockUpStyles = StyleSheet.create({
     container: {

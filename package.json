@@ -34,7 +34,9 @@
     "react-native-web": "~0.19.6",
     "react-native-webview": "^13.8.2",
     "sharp": "^0.33.3",
-    "sharp-cli": "^4.2.0"
+    "sharp-cli": "^4.2.0",
+    "eas-cli": "8.0.0",
+    "expo-dev-client": "~3.3.11"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -12,7 +12,10 @@ import Second from './SecondScreen';
 import Third from './Third';
 import Forth from './Forth';
 import { useNavigation } from '@react-navigation/native';
- 
+import * as Google from 'expo-auth-session/providers/google';
+import * as WebBrowser from 'expo-web-browser';
+WebBrowser.maybeCompleteAuthSession();
+
 const indexing = [
     {
         id:1
@@ -33,7 +36,9 @@ const indexing = [
 const MockUp = () => { 
     const navigation = useNavigation()
 const [index,setIndex]=useState(1)
-
+const [accessToken, setAccessToken] = React.useState();
+const [userInfo, setUserInfo] = React.useState();
+const [message, setMessage] = React.useState();
 
 function handleContinue(){
     if(index < 4){
@@ -41,7 +46,30 @@ function handleContinue(){
         setIndex(index+1)
     }
 }
+const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
+  });
 
+  React.useEffect(() => {
+    // setMessage(JSON.stringify(response));
+    if (response?.type === "success") {
+
+        console.log(response.authentication.accessToken)
+      setAccessToken(response.authentication.accessToken);
+    //    getUserData(response.authentication.accessToken)
+    }
+  }, [response]);
+
+  async function getUserData(token) {
+    let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
+      headers: { Authorization: `Bearer ${token}`}
+    });
+
+    userInfoResponse.json().then(data => {
+    //   setUserInfo(data);
+      console.log(data)
+    });
+  }
 
 
 function HandleChild(){
@@ -92,6 +120,9 @@ const renderItem =({item}) => (
 
 <TouchableOpacity
     onPress={() =>  index === 4 ? navigation.navigate("BottomNavigation") :handleContinue()}
+
+    // onPress={accessToken ? getUserData(accessToken) : () => { promptAsync({showInRevents: true}) }}
+    
    style={{   position: 'absolute', bottom: 60,}}
    >
 {
