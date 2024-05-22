@@ -44,8 +44,8 @@ const navigation =  useNavigation()
 <TouchableOpacity
 style={{marginTop:30}}
 onPress={()=> {
-  onLogCaffeine()
-  // navigation.navigate("UploadImage")
+  // onLogCaffeine()
+  navigation.navigate("UploadImage")
   }}
 >
 

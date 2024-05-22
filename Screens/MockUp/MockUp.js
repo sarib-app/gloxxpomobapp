@@ -46,19 +46,19 @@ function handleContinue(){
         setIndex(index+1)
     }
 }
-const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
-  });
+// const [request, response, promptAsync] = Google.useAuthRequest({
+//     androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
+//   });
 
-  React.useEffect(() => {
-    // setMessage(JSON.stringify(response));
-    if (response?.type === "success") {
+//   React.useEffect(() => {
+//     // setMessage(JSON.stringify(response));
+//     if (response?.type === "success") {
 
-        console.log(response.authentication.accessToken)
-      setAccessToken(response.authentication.accessToken);
-    //    getUserData(response.authentication.accessToken)
-    }
-  }, [response]);
+//         console.log(response.authentication.accessToken)
+//       setAccessToken(response.authentication.accessToken);
+//     //    getUserData(response.authentication.accessToken)
+//     }
+//   }, [response]);
 
   async function getUserData(token) {
     let userInfoResponse = await fetch("https://www.googleapis.com/userinfo/v2/me", {
