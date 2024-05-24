@@ -14,6 +14,7 @@ import StarRatingModal from '../../Components/GlobalStyles/Rating';
 
 const HomeScreen = () => {
 
+
 //   const onLogCaffeine = () => {
 //     Superwall.shared.register('caffeineLogged').then((d) => {
 //       console.log(d)

@@ -19,6 +19,7 @@ import postDataToServer from '../../Components/GlobalCalls/PostScan';
 import sidePose from '../../Components/Data/Images/sidePose.png'
 import frontFace from '../../Components/Data/Images/frontFace.png'
 import * as ImagePicker from 'expo-image-picker';
+import ReferModal from '../Modals/ReferModal';
 
     // Sample API call function to simulate fetching an AI response.
     // Remember to replace placeholder values with actual data for your AI service.
@@ -28,6 +29,23 @@ const navigation= useNavigation()
 const [Images,setImages]=useState([])
 const [base64s,setBase64s]=useState([])
 const [loading,setLoading]=useState(false)
+const [isSubscribed,setIsSubscribed]=useState(false)
+const [freeScan,setFreeSccan]=useState(false)
+const [ShowreferModal,setShowReferModal]=useState(false)
+
+
+
+function onProceed(){
+    if(isSubscribed === true){
+      console.log("Already subscribed")
+    }
+    else if(freeScan === true){
+      console.log("Proceed with free scan")
+    }
+    else{
+      setShowReferModal(true)
+    }
+}
 
 const onSelectImage = async () => {
     // launchImageLibrary({ mediaType: 'photo', includeBase64: true }, (response) => {
@@ -190,7 +208,9 @@ console.log("data =>>>>>>", response)
   }
 
 
-  
+  function closeModal(){
+    setShowReferModal(false)
+  }
 
     return (
         <View
@@ -324,7 +344,9 @@ console.log("data =>>>>>>", response)
     <>
         <TouchableOpacity
     style={{marginTop:50}}
-    onPress={()=> generateImgResponse(base64s)}
+    // onPress={()=> generateImgResponse(base64s)}
+    onPress={()=> onProceed()}
+
     >
 
     <LinearGradient 
@@ -351,6 +373,10 @@ console.log("data =>>>>>>", response)
  
     <LoaderModal
     loading={loading}
+    />
+    <ReferModal
+    visible={ShowreferModal}
+    onClose={closeModal}
     />
 
         </View>

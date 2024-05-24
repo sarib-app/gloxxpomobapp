@@ -46,6 +46,18 @@ function handleContinue(){
         setIndex(index+1)
     }
 }
+
+function TryGoolge(){
+  const requestOptions = {
+    method: "GET",
+    redirect: "follow"
+  };
+  
+  fetch("https://glowx.alphanitesofts.net/api/auth/google", requestOptions)
+    .then((response) => response.json())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}
 // const [request, response, promptAsync] = Google.useAuthRequest({
 //     androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
 //   });
@@ -119,7 +131,9 @@ const renderItem =({item}) => (
 <HandleChild/>
 
 <TouchableOpacity
-    onPress={() =>  index === 4 ? navigation.navigate("BottomNavigation") :handleContinue()}
+    // onPress={() =>  index === 4 ? navigation.navigate("BottomNavigation") :handleContinue()}
+    onPress={() =>  index === 4 ? TryGoolge() :handleContinue()}
+
 
     // onPress={accessToken ? getUserData(accessToken) : () => { promptAsync({showInRevents: true}) }}
     
