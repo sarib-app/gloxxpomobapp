@@ -9,7 +9,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import HomeScreen from '../../Screens/Home/HomeScreen';
 import ProgressPage from '../../Screens/ProgressPage/ProgressPage';
-import MockUp from '../../Screens/MockUp/MockUp';
 import SuggestionScreen from '../../Screens/SuggestionPages/SuggestionScreen';
 const Tab = createBottomTabNavigator();
 

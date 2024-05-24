@@ -24,12 +24,12 @@ const data ={
 }
 
 
-async function postDataToServer(data) {
+async function postDataToServer(data,id) {
   console.log("data in api ", data)
   const url = 'https://glowx.alphanitesofts.net/api/post_user_data';
 
   const data_parse = {
-    user_id:"4",
+    user_id:id,
     total_score:data.total_average_rating,
     face_shape:data.face_shape,
     rating:data.ratings,

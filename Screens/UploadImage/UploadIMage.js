@@ -20,6 +20,8 @@ import sidePose from '../../Components/Data/Images/sidePose.png'
 import frontFace from '../../Components/Data/Images/frontFace.png'
 import * as ImagePicker from 'expo-image-picker';
 import ReferModal from '../Modals/ReferModal';
+import checkAvailability from '../../Components/GlobalCalls/CheckAvailability';
+import getAsyncData from '../../Components/GlobalCalls/GetAsyncData';
 
     // Sample API call function to simulate fetching an AI response.
     // Remember to replace placeholder values with actual data for your AI service.
@@ -46,6 +48,20 @@ function onProceed(){
       setShowReferModal(true)
     }
 }
+const [userData,setUserData] =  useState(null)
+ useEffect(()=>{
+  async function CheckScans(){
+    const localData = await getAsyncData()
+    if(localData != null){
+      setUserData(localData)
+    const res = await checkAvailability(localData.id)
+    setFreeSccan(res > 0 ? true : false)
+  }
+
+  }
+  CheckScans()
+ },[])
+
 
 const onSelectImage = async () => {
     // launchImageLibrary({ mediaType: 'photo', includeBase64: true }, (response) => {
@@ -192,7 +208,7 @@ console.log(formattedUri)
 
 console.log("data =>>>>>>", response)
         
-        const Apiresponse = await postDataToServer(response.data)
+        const Apiresponse = await postDataToServer(response.data,userData.id)
         console.log("success", Apiresponse)
         if(Apiresponse != null){
 
@@ -374,10 +390,14 @@ console.log("data =>>>>>>", response)
     <LoaderModal
     loading={loading}
     />
+    {
+      ShowreferModal &&
     <ReferModal
     visible={ShowreferModal}
     onClose={closeModal}
+    referral_code={userData?.referral_code}
     />
+  }
 
         </View>
     );

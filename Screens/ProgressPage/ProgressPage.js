@@ -13,6 +13,7 @@ import { useIsFocused } from '@react-navigation/native';
 import Colors from '../../Components/GlobalStyles/colors';
 import { useNavigation } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import getAsyncData from '../../Components/GlobalCalls/GetAsyncData';
 const ProgressPage = () => {
 
   const navigation = useNavigation()
@@ -20,11 +21,14 @@ const focused = useIsFocused()
   const [allScans,setAllScans]=useState([])
   useEffect(()=>{
  async function getData(){
-  const response = await GetAllScans()
+  const localData = await getAsyncData()
+  if(localData != null){
+  const response = await GetAllScans(localData.id)
   if(response.status === "200"){
 
     setAllScans(response.data) 
   }
+}
 
 }
 getData()
