@@ -16,6 +16,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import LoginCall from '../../Components/GlobalCalls/LoginCall';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { TextInput } from 'react-native-gesture-handler';
 WebBrowser.maybeCompleteAuthSession();
 
 const indexing = [
@@ -41,6 +42,8 @@ const [index,setIndex]=useState(1)
 const [accessToken, setAccessToken] = React.useState();
 const [userInfo, setUserInfo] = React.useState();
 const [message, setMessage] = React.useState();
+const [refer, setReferBy] = useState("");
+
 const [loading,setLoading]=useState(false)
 function handleContinue(){
     if(index < 4){
@@ -49,32 +52,7 @@ function handleContinue(){
     }
 }
 
-async function LocalLogin(){
-  setLoading(true)
-  const formdata = new FormData();
-  formdata.append("name", "example");
-  formdata.append("email", "example@gmail.com");
-  formdata.append("password", "abcd123");
-  formdata.append("referred_by", "");
-  
-  const requestOptions = {
-    method: "POST",
-    body: formdata,
-    redirect: "follow"
-  };
-  
-  fetch("https://glowx.alphanitesofts.net/api/loginOrRegister", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      if(result.status == "200"){
-        AsyncStorage.setItem("user", JSON.stringify(result.user))
-        navigation.navigate("BottomNavigation")
-    }
-      console.log(result)})
-    .catch((error) => console.error(error))
-    .finally(()=>{
-      setLoading(false)
-    })}
+
 const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
   });
@@ -95,26 +73,59 @@ const [request, response, promptAsync] = Google.useAuthRequest({
     });
 
     userInfoResponse.json().then(data => {
+      setLoading(true)
+
+
     //   setUserInfo(data);
-      console.log(data)
+      // console.log(data)
+      LocalLogin(data)
     });
   }
+  async function LocalLogin(data){
+  console.log(data)
+  const formdata = new FormData();
+  formdata.append("name", data.given_name);
+  formdata.append("email", data.email);
+  formdata.append("password",String(data.id));
+  formdata.append("referred_by",String(refer));
+  
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow"
+  };
+  
+  fetch("https://glowx.alphanitesofts.net/api/loginOrRegister", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      if(result.status == "200"){
+        AsyncStorage.setItem("user", JSON.stringify(result.user))
+        navigation.navigate("BottomNavigation")
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'BottomNavigation' }],
+        });
+    }
+      console.log(result)})
+    .catch((error) => console.error(error))
+    .finally(()=>{
+      setLoading(false)
+    })}
 
-
+function onSetRefer(e){
+ 
+}
 function HandleChild(){
      if(index === 1){
         return(
             <First/>
         )
      }
-     else if(index === 2){
-        return(
-            <Second/>
-        )
-     }
+   
      else if(index === 3){
         return(
-            <Third/>
+            <Third
+            />
         )
      }
      else if(index === 4){
@@ -145,7 +156,30 @@ const renderItem =({item}) => (
         />
  
 </View>
+{
+  index === 2 ? 
+  <>
+  <Text style={MockUpStyles.Title}>
+  Do you have a referal code?
+  </Text>
+  <View style={MockUpStyles.TextInput}>
+  <TextInput
+  placeholder='Enter Referal code'
+  placeholderTextColor={Colors.FontColorII}
+  style={{marginLeft:10,flex:1,color:Colors.FontColorI}}
+  value={refer}
+  onChangeText={(e)=>  setReferBy(e)}
+  />
+  </View>
+  <Text
+  style={{color:Colors.FontColorII}}
+  >
+  Enter refer code if you have any, else skip.
+  </Text>
+  </>:
 <HandleChild/>
+
+}
 
 <TouchableOpacity
     // onPress={() =>  index === 4 ? navigation.navigate("BottomNavigation") :handleContinue()}

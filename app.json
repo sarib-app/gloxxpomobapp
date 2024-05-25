@@ -25,7 +25,8 @@
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.gloxapp.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -37,8 +38,7 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends.",
           "cameraPermission": "Allow glowX to access your camera"
         }
-      ],
-      "expo-build-properties"
+      ]
     ],
     "extra": {
       "eas": {

@@ -6,7 +6,7 @@ import ai_icon from '../../Components/Data/Images/ai_icon.png'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import GetFeedBack from '../../Components/GlobalCalls/GetFeedBack';
 const WindowWidth = Dimensions.get('screen').width
-  const WindowHeight = Dimensions.get('window').height; 
+  const WindowHeight = Dimensions.get('screen').height; 
 const data1 ={
     Face_Analysis: {
         "Nose": 8,
@@ -51,7 +51,7 @@ const navigation = useNavigation()
         </>:
         <>
       <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:16,textAlign:'center'}}>{name}</Text>
-              <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:name != "Face Shape"?55:40}}>{value}</Text>
+              <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:name != "Face Shape"?48:30,textAlign:'center'}}>{value}</Text>
       <Text style={{color:Colors.FontColorI,fontWeight:'400',fontSize:10,textAlign:'center'}}>Scroll to see feedback</Text>
 
         </>
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     // padding: 16, 
     backgroundColor: Colors.Dark,
     alignItems:'center',
-    paddingBottom:30
+    // paddingBottom:30
     
   },
   totalRating: {

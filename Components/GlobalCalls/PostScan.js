@@ -24,12 +24,13 @@ const data ={
 }
 
 
-async function postDataToServer(data,id) {
+async function postDataToServer(data,id,freeScan) {
   console.log("data in api ", data)
   const url = 'https://glowx.alphanitesofts.net/api/post_user_data';
 
   const data_parse = {
     user_id:id,
+    free_scan:freeScan === true ? "true":"false",
     total_score:data.total_average_rating,
     face_shape:data.face_shape,
     rating:data.ratings,

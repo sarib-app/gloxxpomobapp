@@ -43,6 +43,7 @@ function onProceed(){
     }
     else if(freeScan === true){
       console.log("Proceed with free scan")
+      generateImgResponse(base64s)
     }
     else{
       setShowReferModal(true)
@@ -208,7 +209,7 @@ console.log(formattedUri)
 
 console.log("data =>>>>>>", response)
         
-        const Apiresponse = await postDataToServer(response.data,userData.id)
+        const Apiresponse = await postDataToServer(response.data,userData.id,freeScan)
         console.log("success", Apiresponse)
         if(Apiresponse != null){
 

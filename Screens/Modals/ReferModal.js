@@ -31,7 +31,7 @@ function ReferModal({visible,onClose,referral_code}){
                 </Text>
                 <View style={{width:"100%",padding:20,flexDirection:'row',alignItems:"center",justifyContent:"space-between"}}>
 <View style={{width:"70%",backgroundColor:"black",height:80,borderRadius:10,justifyContent:"center"}}>
-<Text style={{color:Colors.FontColorI,fontWeight:'bold',marginLeft:20}}>ssds{referral_code}</Text>
+<Text style={{color:Colors.FontColorI,fontWeight:'bold',marginLeft:20}}>{referral_code}</Text>
 </View>
 <View style={{width:"25%",backgroundColor:Colors.PrimaryColor,height:80,borderRadius:10,alignItems:"center",justifyContent:"center"}}>
 <Text style={{color:Colors.FontColorI,fontWeight:'bold'}}>Share</Text>

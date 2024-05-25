@@ -21,6 +21,8 @@ import FormScreen from './Screens/SuggestionPages/FormScreen';
 import SuggestionDetails from './Screens/SuggestionPages/SuggestionDetails';
 import FeedBack from './Screens/SuggestionPages/FeedBack';
 import Superwallfunc from './Screens/Superwall/SuperWall';
+import getAsyncData from './Components/GlobalCalls/GetAsyncData';
+import LoadingMockup from './Screens/LoadingMockUp';
 
 
 LogBox.ignoreAllLogs()
@@ -31,17 +33,39 @@ const App = () => {
 
 
 const [loggedIn,setLoggedIn]=useState(false)
+const [inital,setInitial]=useState("MockUp")
+const [loading,setLoading]=useState(true)
 
-// useEffect(()=>{
-//   Superwallfunc()
-//   // SplashScreen.hide()
 
-// },[])
+useEffect(()=>{
+  // Superwallfunc()
+  // SplashScreen.hide()
+ async function GetAsyncDataa(){
+  const localData = await getAsyncData()
+  console.log("localll",localData)
+  if(localData != null){
+    setInitial("BottomNavigation")
+  setLoading(false)
 
+  }else{
+    setLoading(false)
+  }
+ }
+ GetAsyncDataa()
+
+},[])
+
+
+if(loading === true){
+  return(
+
+    <LoadingMockup/>
+  )
+}
 
 return( 
     <NavigationContainer>
-    <Stack.Navigator initialRouteName={"MockUp"} screenOptions={{
+    <Stack.Navigator initialRouteName={inital} screenOptions={{
       headerShown: false
     }}
     >
