@@ -42,8 +42,9 @@ function onProceed(){
   console.log("start it")
   // remotely decide if a paywall is shown and if
 // navigation.startWorkout() is a paid-only feature
+// Superwall.shared.
 Superwall.shared.register('1basic').then((e) => {
-  navigation.startWorkout();
+  navigation.navigate("BottomNavigation")
 }).
 catch((e)=>{
 console.log(e)

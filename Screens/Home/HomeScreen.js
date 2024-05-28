@@ -8,6 +8,7 @@ import Colors from '../../Components/GlobalStyles/colors';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import StarRatingModal from '../../Components/GlobalStyles/Rating';
+import Superwall from '@superwall/react-native-superwall';
 // import Superwall from '@superwall/react-native-superwall';
 // Sample API call function to simulate fetching an AI response.
 // Remember to replace placeholder values with actual data for your AI service.
@@ -15,13 +16,13 @@ import StarRatingModal from '../../Components/GlobalStyles/Rating';
 const HomeScreen = () => {
 
 
-//   const onLogCaffeine = () => {
-//     Superwall.shared.register('caffeineLogged').then((d) => {
-//       console.log(d)
-//       Alert.alert("Its successfull")
-//       // presentLogCaffeine();
-//     });
-// };
+  const onLogCaffeine = () => {
+    Superwall.shared.register('StartWorkout').then((d) => {
+      console.log(d)
+      Alert.alert("Its successfull")
+      // presentLogCaffeine();
+    });
+};
 const navigation =  useNavigation()
   return (
     <View
@@ -45,8 +46,8 @@ const navigation =  useNavigation()
 <TouchableOpacity
 style={{marginTop:30}}
 onPress={()=> {
-  // onLogCaffeine()
-  navigation.navigate("UploadImage")
+  onLogCaffeine()
+  // navigation.navigate("UploadImage")
   }}
 >
 
