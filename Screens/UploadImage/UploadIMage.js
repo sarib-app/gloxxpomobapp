@@ -23,12 +23,14 @@ import ReferModal from '../Modals/ReferModal';
 import checkAvailability from '../../Components/GlobalCalls/CheckAvailability';
 import getAsyncData from '../../Components/GlobalCalls/GetAsyncData';
 import Superwall from '@superwall/react-native-superwall';
+import { useIsFocused } from '@react-navigation/native';
 
     // Sample API call function to simulate fetching an AI response.
     // Remember to replace placeholder values with actual data for your AI service.
 
     const UploadImage = () => {
 const navigation= useNavigation()
+const focused = useIsFocused()
 const [Images,setImages]=useState([])
 const [base64s,setBase64s]=useState([])
 const [loading,setLoading]=useState(false)
@@ -38,26 +40,42 @@ const [ShowreferModal,setShowReferModal]=useState(false)
 
 
 
+
+useEffect(()=>{
+  Superwall.shared.getSubscriptionStatus('StartWorkout').then((e)=>{
+    console.log(e)
+    if(e == "UNKNOWN" ){
+    setIsSubscribed(false)
+    }
+    else{
+      setIsSubscribed(true)
+    }
+    })
+},[focused])
+
 function onProceed(){
-  console.log("start it")
-  // remotely decide if a paywall is shown and if
-// navigation.startWorkout() is a paid-only feature
-Superwall.shared.register('1basic').then((e) => {
-  navigation.startWorkout();
-}).
-catch((e)=>{
-console.log(e)
-})
-   // if(isSubscribed === true){
-    //   console.log("Already subscribed")
-    // }
-    // else if(freeScan === true){
-    //   console.log("Proceed with free scan")
-    //   generateImgResponse(base64s)
-    // }
-    // else{
-    //   setShowReferModal(true)
-    // }
+// Superwall.shared.register('StartWorkout').then((e) => {
+//   navigation.startWorkout();
+// }).
+// catch((e)=>{
+// console.log(e)
+// })
+   if(isSubscribed === true){
+      console.log("Already subscribed")
+      generateImgResponse(base64s)
+    }
+    else if(freeScan === true){
+      console.log("Proceed with free scan")
+      generateImgResponse(base64s)
+    }
+    else{
+      setShowReferModal(true)
+    }
+}
+
+function subsciptionSuccess(){
+  setShowReferModal(false)
+  navigation.goBack()
 }
 const [userData,setUserData] =  useState(null)
  useEffect(()=>{
@@ -407,6 +425,7 @@ console.log("data =>>>>>>", response)
     visible={ShowreferModal}
     onClose={closeModal}
     referral_code={userData?.referral_code}
+    successSubscription={subsciptionSuccess}
     />
   }
 

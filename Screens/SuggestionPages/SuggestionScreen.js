@@ -13,6 +13,8 @@ import Colors from '../../Components/GlobalStyles/colors';
 import { useNavigation } from '@react-navigation/native';
 import SuggestioonStyles from './SuggesionSyles';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Superwall from '@superwall/react-native-superwall';
+import ReferModal from '../Modals/ReferModal';
 
 
 const data = [
@@ -73,10 +75,39 @@ const SuggestionScreen = () => {
   const navigation = useNavigation()
 const focused = useIsFocused()
 
+const [isSubscribed,setIsSubscribed]=useState(false)
+
+useEffect(()=>{
+  Superwall.shared.getSubscriptionStatus('StartWorkout').then((e)=>{
+    console.log(e)
+    if(e == "UNKNOWN" ){
+    setIsSubscribed(false)
+    }
+    else{
+      setIsSubscribed(true)
+    }
+    })
+},[focused])
+
+function OnClickk(item){
+  if(isSubscribed === true){
+    navigation.navigate("FormScreen",{data:item})
+  }
+  else{
+    Superwall.shared.register('StartWorkout').then((e) => {
+      navigation.navigate("FormScreen",{data:item})
+
+}).
+catch((e)=>{
+console.log(e)
+})
+  }
+} 
+
 
 const renderItems=({item})=>(
 <TouchableOpacity
-onPress={()=>  navigation.navigate("FormScreen",{data:item}) }
+onPress={()=> OnClickk(item) }
 style={SuggestioonStyles.ListCard}> 
 <View style={{flexDirection:"row",alignItems:'center'}}>
 < LinearGradient 
@@ -111,7 +142,7 @@ style={{marginRight:10}}
 
     <Text style={SuggestioonStyles.Title}>Your Coach</Text>
     <TouchableOpacity
-onPress={()=>  navigation.navigate("FacialAnalysisScreen",{data:item}) }
+// onPress={()=>  navigation.navigate("FacialAnalysisScreen",{data:item}) }
 style={[SuggestioonStyles.ListCard,{marginTop:10}]}> 
 <View style={{flexDirection:"row",alignItems:'center'}}>
 < LinearGradient 

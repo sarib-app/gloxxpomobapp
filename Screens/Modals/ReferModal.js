@@ -1,10 +1,22 @@
 import React,{useState} from "react";
 // import { View,Modal } from "react-native";
 import Colors from "../../Components/GlobalStyles/colors";
-import { View,Modal ,Text, Pressable} from "react-native";
+import { View,Modal ,Text, Pressable, TouchableOpacity} from "react-native";
 import { Share } from "react-native";
+import Superwall from "@superwall/react-native-superwall";
 
-function ReferModal({visible,onClose,referral_code}){
+function ReferModal({visible,onClose,referral_code,successSubscription}){
+
+function Subscriptions(){
+    Superwall.shared.register('StartWorkout').then((e) => {
+        successSubscription();
+}).
+catch((e)=>{
+console.log(e)
+})
+}
+
+
     return(
         <Modal 
         visible={visible}
@@ -33,13 +45,18 @@ function ReferModal({visible,onClose,referral_code}){
 <View style={{width:"70%",backgroundColor:"black",height:80,borderRadius:10,justifyContent:"center"}}>
 <Text style={{color:Colors.FontColorI,fontWeight:'bold',marginLeft:20}}>{referral_code}</Text>
 </View>
-<View style={{width:"25%",backgroundColor:Colors.PrimaryColor,height:80,borderRadius:10,alignItems:"center",justifyContent:"center"}}>
+<Pressable style={{width:"25%",backgroundColor:Colors.PrimaryColor,height:80,borderRadius:10,alignItems:"center",justifyContent:"center"}}>
 <Text style={{color:Colors.FontColorI,fontWeight:'bold'}}>Share</Text>
-</View>
+</Pressable>
                 </View>
                 <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:18,marginTop:0,textAlign:"center",width:"60%"}}>
-                    Win a free scan 🥳
+                    OR
                 </Text>
+                <TouchableOpacity 
+                onPress={()=> Subscriptions()}
+                style={{width:"60%",backgroundColor:Colors.PrimaryColor,height:60,borderRadius:10,alignItems:"center",justifyContent:"center",marginTop:20}}>
+<Text style={{color:Colors.FontColorI,fontWeight:'bold'}}>Subscribe Now</Text>
+</TouchableOpacity>
             </View>
 
             </Pressable>
