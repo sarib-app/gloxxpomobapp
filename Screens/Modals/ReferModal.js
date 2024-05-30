@@ -9,7 +9,13 @@ function ReferModal({visible,onClose,referral_code,successSubscription}){
 
 function Subscriptions(){
     Superwall.shared.register('StartWorkout').then((e) => {
-        successSubscription();
+
+        if(e == "INACTIVE" || e  == undefined || e  == "UNKNOWN" || e == null || e == false || e == "null" || e == "NULL" || e == "false" ){
+      
+        }
+        else{
+            successSubscription();
+        }
 }).
 catch((e)=>{
 console.log(e)

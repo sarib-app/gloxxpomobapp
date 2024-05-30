@@ -44,7 +44,7 @@ const [ShowreferModal,setShowReferModal]=useState(false)
 useEffect(()=>{
   Superwall.shared.getSubscriptionStatus('StartWorkout').then((e)=>{
     console.log(e)
-    if(e == "UNKNOWN" ){
+    if(e == "INACTIVE" || e  == undefined || e  == "UNKNOWN" || e == null || e == false || e == "null" || e == "NULL" || e == "false" ){
     setIsSubscribed(false)
     }
     else{
