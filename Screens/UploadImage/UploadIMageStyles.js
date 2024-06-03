@@ -50,8 +50,6 @@ const UploadImageStyles = StyleSheet.create({
         paddingVertical: 10,
         flexDirection:"row",alignItems:"center",
         justifyContent:'space-between',
-     
-     
         borderRadius: 1000,
         //   borderColor: Colors.FontColorI,
         backgroundColor: Colors.Dark,
@@ -64,7 +62,8 @@ const UploadImageStyles = StyleSheet.create({
         fontWeight: '500',
         fontSize: 18,
         color: Colors.FontColorI,
-        marginRight:10
+        marginRight:10,
+        textAlign:'center'
     },
 
 

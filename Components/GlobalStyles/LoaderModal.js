@@ -37,7 +37,7 @@ animationType='none'
   } />
 
   <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:25,marginTop:-150}}>
-    Scanning....
+  This may take up to a minute
   </Text>
   </View>
     </Modal>

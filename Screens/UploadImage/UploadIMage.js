@@ -270,11 +270,11 @@ console.log("data =>>>>>>", response)
    
     <>
        <Text  style={UploadIMageStyles.TitleTwo}>
-    Upload image to begin the process
+       {Images.length < 1 ?"Start by uploading a photo of the front of your face":"Great! Now upload a photo of your side profile"}
     </Text>
-    <Text  style={UploadIMageStyles.DescText}>
-    Scan your face to get complete rating on your looks and recommendations to make your face look better than ever.
-    </Text>
+    {/* <Text  style={UploadIMageStyles.DescText}>
+    Start by uploading a photo of the front of your face
+    </Text> */}
     </>
     <>
     <View style={{height:150,flexDirection:'row',alignItems:'center',marginTop:50}}>
@@ -322,17 +322,23 @@ console.log("data =>>>>>>", response)
 
 
 {
-    Images.length >=2 &&
+    Images.length >=2 ?
 
     <>
         <Text  style={[UploadIMageStyles.TitleTwo,{marginTop:50}]}>
     Well Done!
     </Text>
     <Text  style={UploadIMageStyles.DescText}>
-   Now click the proceed further and start generating yur recomnedations
+   Now click the proceed further and start generating your recomnedations
+    </Text>
+    </>:
+    <>
+    <Text  style={UploadIMageStyles.DescText}>
+    For best results be sure to get good, even lighting. Otherwise results like eye color may be inaccurate
     </Text>
     </>
 }
+
 
 {
     Images.length < 2  ?
@@ -356,7 +362,7 @@ console.log("data =>>>>>>", response)
                 style={
                 UploadIMageStyles.ButtonTxt}
             >
-            { Images.length  ===1 ? "Upload side face":"Upload front face"}
+            { Images.length  ===1 ? "Upload from gallery":"Upload from gallery"}
             </Text>
             
             </LinearGradient>
@@ -380,7 +386,7 @@ console.log("data =>>>>>>", response)
                 style={
                 UploadIMageStyles.ButtonTxt}
             >
-            Click Photo Now 
+            Take a photo now 
             </Text>
             
             </LinearGradient>

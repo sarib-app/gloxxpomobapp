@@ -10,6 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import HomeScreen from '../../Screens/Home/HomeScreen';
 import ProgressPage from '../../Screens/ProgressPage/ProgressPage';
 import SuggestionScreen from '../../Screens/SuggestionPages/SuggestionScreen';
+import { AntDesign } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigation = () => {
@@ -40,12 +41,8 @@ const BottomNavigation = () => {
       options={{
         tabBarLabel: 'Scan',
         tabBarIcon: ({ color, size }) => (
-        <Fontisto 
-        name='coffeescript'
-                    size={20}
-        color={ color}
-
-        />        
+          <AntDesign name="scan1" size={20} color={ color} />
+             
        ),}}
 
 
@@ -71,7 +68,7 @@ const BottomNavigation = () => {
 
 <Tab.Screen name="Coach" component={SuggestionScreen} 
       options={{
-        tabBarLabel: 'Suggest',
+        tabBarLabel: 'Resources',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons
     name='bell-outline'

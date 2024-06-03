@@ -20,53 +20,44 @@ import ReferModal from '../Modals/ReferModal';
 const data = [
     {
         id:1,
-        title:"Improve you over all",
-        icon:"🔥",
-        query:"Improve my looks over all",
+        title:"Elevate jawline",
+        icon:"🗿",
+        query:"How can i elevate my jawline look shar and perfect, hhow can i improve my faceshape",
         colorI:"#003C43",
         colorII:"#135D66",
         color:"#E3FEF7"
     },
     {
         id:2,
-        title:"Gain more muscle",
-        icon:"💪",
-        query:"Help me get more msucles",
-
-        colorI:"#008DDA",
-        colorII:"#41C9E2",
-        color:"#ACE2E1"
-    },
-    {
-        id:13,
-        title:"Lose body fat",
-        icon:"🥵",
-        query:"Lose my body fats",
-
-        colorI:"#FFF3C7",
-        colorII:"#FEC7B4",
-        color:"#FC819E"
-    },
-    {
-        id:1,
-        title:"Get clear skin",
+        title:"Skin Quality - Fixing Dark Spots",
         icon:"💆🏻",
-        query:"To clear my skin and make it look more smooth and good",
-
-        colorI:"#1B1A55",
-        colorII:"#535C91",
-        color:"#9290C3"
-    },
-    {
-        id:1,
-        title:"Sharpen your jawline",
-        icon:"🗿",
-        query:"to sharpen my jawline",
+        query:"How can i improve my skin quality and remove dark spots on my face, what can i do to avoid dark spots, suggest some products to improve my over all skin quality",
 
         colorI:"#739072",
         colorII:"#86A789",
         color:"#D2E3C8"
     },
+    {
+        id:3,
+        title:"Face Shape - Makeup and More",
+        icon:"💄👱🏻‍♀️",
+        query:"I am a female how can i improve my face shape, whichh kind of make should i apply to look more attractive and stunning.",
+
+        colorI:"#003C13",
+        colorII:"#102D00",
+        color:"#E3FEF7"
+    },
+    {
+        id:4,
+        title:"Guide to your hair/eye color",
+        icon:"💇🏻‍♀️",
+        query:"I am a female how can i improve my hair quality and enhhance my eyes color and beauty, improve hair colorr, quality and health",
+
+        colorI:"#1B1A55",
+        colorII:"#535C91",
+        color:"#9290C3"
+    },
+   
 
     
 ]
@@ -91,7 +82,9 @@ useEffect(()=>{
 
 function OnClickk(item){
   if(isSubscribed === true){
-    navigation.navigate("FormScreen",{data:item})
+    // navigation.navigate("FormScreen",{data:item})
+    navigation.navigate("FeedBack",{prompt: item.query,title:item.title})
+
   }
   else{
     Superwall.shared.register('StartWorkout').then((e) => {
@@ -127,7 +120,7 @@ style={SuggestioonStyles.ListCard}>
 
 </LinearGradient>
 
-  <Text style={[SuggestioonStyles.TitleTwo,{fontSize:16,marginLeft:10}]}>
+  <Text style={[SuggestioonStyles.TitleTwo,{fontSize:14,marginLeft:10,width:"60%"}]}>
      {item.title}
   </Text>
  
@@ -175,7 +168,7 @@ style={{marginRight:10}}
 />
 </TouchableOpacity>
 
-<Text style={[SuggestioonStyles.TitleTwo,{alignSelf:'flex-start',margin:10}]}>Your Scans</Text>
+<Text style={[SuggestioonStyles.TitleTwo,{alignSelf:'flex-start',margin:10}]}>your guides</Text>
 {
   data.length >= 1 &&
 <FlatList 

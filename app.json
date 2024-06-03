@@ -27,7 +27,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.gloxapp.app",
-      "versionCode": 7
+      "versionCode": 9
     },
     "web": {
       "favicon": "./assets/favicon.png"

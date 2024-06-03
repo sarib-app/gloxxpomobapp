@@ -53,6 +53,9 @@ style={ProgressStyles.ListCard}>
   <Text style={{color:Colors.FontColorI,fontWeight:'300'}}>
    Click here to see the Scan details !
   </Text>
+  <Text style={{color:Colors.FontColorI,fontWeight:'300'}}>
+  {item.created_at}
+  </Text>
 </View>
 </TouchableOpacity>
   )
@@ -60,8 +63,8 @@ style={ProgressStyles.ListCard}>
   return (
     <View
        style={ProgressStyles.container}>
-
-    <Text style={ProgressStyles.Title}>1 🔥 Day Streak</Text>
+  <Text style={[ProgressStyles.TitleTwo,{textAlign:'center',alignSelf:'center',margin:10,marginTop:20}]}>Scan once a day to keep track of your glow up progress!</Text>
+    <Text style={[ProgressStyles.Title,,{alignSelf:'center'}]}>1 🔥 Day Streak</Text>
     < LinearGradient 
         colors={[Colors.PrimaryColor, Colors.PrimaryColor,Colors.SeconderyColor, Colors.SeconderyColor]}  
 style={ProgressStyles.ProgressCard}>
