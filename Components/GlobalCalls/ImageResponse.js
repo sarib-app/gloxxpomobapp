@@ -17,7 +17,7 @@ const sendImageToOpenAI = async (base64) => {
             {
               "type": "text",
               // "text": "What’s in this image? This is my image what does my nose, lips, eyes, skin,acne,skin tone,face shape,cheeks,chin, jaw and eye brows looks like. Provide bullet by bullet answer"
-              "text": "What’s in this image? This is my image do i have dark spots? do i have acnes? what is the shape of my face (Oval/Sqaure/Rectangular/Heart)? what is the color of my eyes, what is the color of my hair? what is my hairstyle and hair quality does it look like i am getting bald? what is my skin condition and quality , do i have acne or rough skin or skin burn or dark circles? what is my facial strcuture (do extra deep analysis)? . Please do advanced critical and strict analysis and Provide bullet by bullet answer."
+              "text": "What’s in this image? if there is no human face visible or available in image then return null else proceed witht he query ahead This is my image do i have dark spots? do i have acnes? what is the shape of my face (Oval/Sqaure/Rectangular/Heart)? what is the color of my eyes, what is the color of my hair? what is my hairstyle and hair quality does it look like i am getting bald? what is my skin condition and quality , do i have acne or rough skin or skin burn or dark circles? what is my facial strcuture (do extra deep analysis)? . Please do advanced critical and strict analysis and Provide bullet by bullet answer. Note: Be critical try to give low and honest review."
 
             },
             {

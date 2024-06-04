@@ -53,8 +53,10 @@ function handleContinue(){
 }
 
 
+// androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
 const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId: "478045906474-lue2r84m0vcg977e4gg6iq20fi2jd45u.apps.googleusercontent.com"
+    androidClientId: "501543492550-f0p2hkpv90rcuqu3hrkt8en6dq8pgu5b.apps.googleusercontent.com"
+
   });
 
   React.useEffect(() => {
@@ -234,6 +236,25 @@ index === 4 ?
         </LinearGradient>
 }
 </TouchableOpacity>
+{
+  index > 1 &&
+<TouchableOpacity
+style={{position:'absolute',bottom:10}}
+onPress={()=>{
+  if(index > 1){
+    setIndex(index - 1)
+  }
+}}
+>
+
+<Text 
+
+
+style={{fontWeight:'bold',color:"white",fontSize:20}}>Back</Text>
+</TouchableOpacity>
+}
+
+
     </View>
   );
 };

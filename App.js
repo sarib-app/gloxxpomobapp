@@ -26,6 +26,7 @@ import LoadingMockup from './Screens/LoadingMockUp';
 import Superwall from "@superwall/react-native-superwall"
 
 import { Platform } from 'react-native';
+import ContentScreen from './Screens/Contents/Contents';
 LogBox.ignoreAllLogs()
 // const Stack = createNativeStackNavigator();
 const Stack = createStackNavigator();
@@ -81,6 +82,8 @@ return(
     <Stack.Screen name="FormScreen" component={FormScreen} />
     <Stack.Screen name="SuggestionDetails" component={SuggestionDetails} />
     <Stack.Screen name="FeedBack" component={FeedBack} />
+    <Stack.Screen name="ContentScreen" component={ContentScreen} />
+
 
 
 

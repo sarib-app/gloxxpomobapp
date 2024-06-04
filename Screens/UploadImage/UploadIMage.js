@@ -60,6 +60,9 @@ function onProceed(){
 // catch((e)=>{
 // console.log(e)
 // })
+
+// generateImgResponse(base64s)
+
    if(isSubscribed === true){
       console.log("Already subscribed")
       generateImgResponse(base64s)
@@ -211,26 +214,35 @@ console.log(formattedUri)
   const [Responses,setResponses]=useState([])
   async function generateImgResponse(base64Array, uriArray) {
     setLoading(true)
-    const responses = [];
+    let responses ;
   
-    for (let i = 0; i < base64Array.length; i++) {
-      const base64 = base64Array[i];
-      const response = await sendImageToOpenAI(base64);
+    // for (let i = 0; i < base64Array.length; i++) {
+    //   const base64 = base64Array[i];
+    //   const response = await sendImageToOpenAI(base64);
       
-      if (response) {
-        responses.push(response);
-        console.log(response)
-      } else {
-        Alert.alert("Error", "Something went wrong! Try again later");
-        return; // Stop processing further if there's an error
-      }
+    //   if (response) {
+    //     responses.push(response);
+    //     console.log(response)
+    //   } else {
+    //     Alert.alert("Error", "Something went wrong! Try again later");
+    //     return; // Stop processing further if there's an error
+    //   }
+    // }
+
+    const base64 = base64Array[0];
+    const response = await sendImageToOpenAI(base64);
+    
+      if(response == null || response == "null"  || response == "NULL"){
+      Alert.alert("Can not procees","It looks like is no face visible or available in the image you provided")
+      setLoading(false)
+      return; // Stop processing further if there's an error
+
     }
-  
+    // responses = response
     // Append responses to the hook
-    setResponses([...Responses, ...responses]);
+    // setResponses([...Responses, ...responses]);
     // setLoading(false)
-    const data = await getAIResponse(responses[0])
-    // console.log(data)
+    const data = await getAIResponse(response)
     if(data != null){
       const response = await JSON.parse(data)
 

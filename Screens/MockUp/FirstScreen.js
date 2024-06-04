@@ -6,6 +6,8 @@ import MockUpStyles from './MockUpStyles';
 import Colors from '../../Components/GlobalStyles/colors'
 import stars from '../../Components/Data/Images/5Star.png'
 import model from '../../Components/Data/Images/model.png'
+import logo from '../../assets/logo.gif'
+import name from '../../assets/name.png'
 import { LinearGradient } from 'expo-linear-gradient';
 function First(){
     return(
@@ -14,12 +16,13 @@ function First(){
     Trusted by 100k+ People
 </Text>
 <Image 
-source={model}
-style={{width:250,height:250,marginTop:50}}
+source={logo}
+style={{width:150,height:150,marginTop:50}}
 />
-<Text style={MockUpStyles.Title}>
-    Glow X
-</Text>
+<Image 
+source={name}
+style={{width:100,height:30,marginTop:20}}
+/>
 <Text style={[MockUpStyles.Title,{marginTop:10}]}>
     Become a part of us
 </Text>

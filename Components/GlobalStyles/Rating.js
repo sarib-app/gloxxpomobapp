@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, View, Text, TouchableOpacity, Image,Linking } from 'react-native';
 import Colors from './colors';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const StarRatingModal = () => {
   const [isModalVisible, setIsModalVisible] = useState(true);
@@ -10,6 +11,9 @@ const StarRatingModal = () => {
   const handleStarPress = (newRating) => {
     setRating(newRating);
   };
+  useEffect(()=>{
+AsyncStorage.setItem("ratingModal","true")
+  },[])
 
   const handleCloseModal = () => {
     setIsModalVisible(false);
@@ -19,7 +23,7 @@ const StarRatingModal = () => {
     if (rating > 0) { // Redirect only if a rating is selected
       // Consider using a safer approach like opening the link in a browser window:
       setIsModalVisible(false); // Close modal after redirect
-      Linking.openURL("https://play.google.com/store/games?hl=en&gl=US")
+      Linking.openURL("https://play.google.com/store/apps/details?id=com.gloxapp.app")
       // Implement a safer redirect method, e.g., using a WebView or InAppBrowser:
       // Linking.openURL('https://nothing.com');  // (Uncomment if using Linking)
     }

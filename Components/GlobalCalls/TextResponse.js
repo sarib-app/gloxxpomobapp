@@ -230,7 +230,7 @@ const getAIResponse = async (gpt4Response) => {
 
     // Construct the prompt for GPT-3 based on the facial features
     // const prompt = `Ratings out of 10:\n${facialFeatures.join('\n')}\nTotal Average Rating Out of 10:\nRecommendation:\nDressing:`;
- const prompt = `According to this information ${gpt4Response} generate rating out of 100  of  Skin_Quality_rating,Facial_structure_rating, HairStyle_rating,Face_shape_rating in this format ratings:${ratings} and create definations of these attributes  Skin_Quality_defination, Facial_structure_defination, HairStyle_defination,Face_shape_defination in this same format definations:${definations} , and provide total_average_rating according to all other ratings! and colors of   Hair_color, Eye_color in thhis format colors:${colors} and face_shape:"Oval/Sqaure/Rectangular/Heart" note: please do critical analysis if user has acne,dark circles, normal beard shape etc then effect the rating because of them! try to find excuses to deduct the ratings and give a bit of egative marking `
+ const prompt = `According to this information ${gpt4Response} generate rating out of 100  of  Skin_Quality_rating,Facial_structure_rating, HairStyle_rating,Face_shape_rating in this format ratings:${ratings} and create definations of these attributes  Skin_Quality_defination, Facial_structure_defination, HairStyle_defination,Face_shape_defination in this same format definations:${definations} , and provide total_average_rating according to all other ratings! and colors of   Hair_color, Eye_color in thhis format colors:${colors} and face_shape:"Oval/Sqaure/Rectangular/Heart" note: please do critical analysis if user has acne,dark circles, normal beard shape etc then effect the rating because of them! try to find excuses to deduct the ratings and give a bit of negative marking, be critical give lower ratings. `
     try {
       const response = await fetch(aiEndpoint, {
         method: 'POST',
@@ -242,7 +242,7 @@ const getAIResponse = async (gpt4Response) => {
           model: "gpt-3.5-turbo", // Specify the model you want to use
           messages: [{
             "role": "system",
-            "content": `Generate response in JSON format against information,provide data wrapped in object of data like this data:{ratings:${ratings}, definations:${definations}, colors:${colors}, total_average_rating"", face_shape:""}`
+            "content": `Generate response in JSON format against information,provide data wrapped in object of data like this data:{ratings:${ratings}, definations:${definations}, colors:${colors}, total_average_rating"", face_shape:""}, note:try to give lower rating, be critical!`
           }, {
             "role": "user",
             "content": prompt

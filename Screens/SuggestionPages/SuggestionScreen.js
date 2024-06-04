@@ -137,8 +137,19 @@ style={{marginRight:10}}
   return (
     <View
        style={SuggestioonStyles.container}>
+<View style={{width:"100%",justifyContent:"space-between",flexDirection:'row',alignItems:'center',marginTop:20}}>
 
     <Text style={SuggestioonStyles.Title}>Your Coach</Text>
+    <TouchableOpacity
+    onPress={()=>{
+      navigation.navigate("ContentScreen")
+    }}
+    style={{marginRight:10}}
+    >
+
+    <Ionicons name="settings" size={24} color="white" />
+    </TouchableOpacity>
+    </View>
     <TouchableOpacity
 // onPress={()=>  navigation.navigate("FacialAnalysisScreen",{data:item}) }
 style={[SuggestioonStyles.ListCard,{marginTop:10}]}> 

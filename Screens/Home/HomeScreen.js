@@ -69,7 +69,7 @@ onPress={()=> {
          
         </LinearGradient>
         </TouchableOpacity>
-<StarRatingModal />
+{/* <StarRatingModal /> */}
     </View>
   );
 };

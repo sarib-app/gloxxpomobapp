@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet,ScrollView, TouchableOpacity ,Dimensions,Image} from 'react-native';
 import Colors from '../../Components/GlobalStyles/colors';
 import postDataToServer from '../../Components/GlobalCalls/PostScan';
 import ai_icon from '../../Components/Data/Images/ai_icon.png'
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import GetFeedBack from '../../Components/GlobalCalls/GetFeedBack';
+import logo from '../../assets/logo.gif'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import StarRatingModal from '../../Components/GlobalStyles/Rating';
 const WindowWidth = Dimensions.get('screen').width
   const WindowHeight = Dimensions.get('screen').height; 
 const data1 ={
@@ -32,17 +35,49 @@ const data1 ={
     "Total_Average_Score": 8.18
 }
 const FacialAnalysisScreen = ({ route }) => {
+
+  const [showRating,setShowRating] = useState(false)
+
     const { data } = route.params;
 console.log("thhis is data1",data)
+
 const navigation = useNavigation()
+
+
+useEffect(()=>{
+async function getrRating(){
+  const rating = await AsyncStorage.getItem("ratingModal")
+  if(rating != "true"){
+    setShowRating(true)
+  }
+  
+}
+getrRating()
+},[])
  
     const RenderItem = ({ name,value,icon,color }) => {
+
+      let bottomColor;
+
+      if (value <= 65) {
+        bottomColor = 'red';
+      } else if (value >= 66 && value <= 75) {
+        bottomColor = 'yellow';
+      } else if (value >= 76 && value <= 84) {
+        bottomColor = 'orange';
+      } 
+      else if (value >= 84 && value <= 100) {
+        bottomColor = 'green';
+      }
+      else {
+        bottomColor = 'green'; // Or any default color
+      }
         
         
         return(
     <TouchableOpacity 
     // onPress={()=> postdataToServer()}
-    style={[styles.analysisItem,{borderColor:color}]}>
+    style={[styles.analysisItem,{borderColor:bottomColor}]}>
       {
         name == "Colors" ? 
         <>
@@ -51,8 +86,8 @@ const navigation = useNavigation()
         </>:
         <>
       <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:16,textAlign:'center'}}>{name}</Text>
-              <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:name != "Face Shape"?48:30,textAlign:'center'}}>{value}</Text>
-      <Text style={{color:Colors.FontColorI,fontWeight:'400',fontSize:10,textAlign:'center'}}>Scroll to see feedback</Text>
+              <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:name != "Face Shape"?48:18,textAlign:'center'}}>{name == "Face Shape"?value:Number(value).toFixed(0)}</Text>
+      {/* <Text style={{color:Colors.FontColorI,fontWeight:'400',fontSize:10,textAlign:'center'}}>Scroll to see feedback</Text> */}
 
         </>
 
@@ -65,6 +100,21 @@ const navigation = useNavigation()
 
 const Analysis = data?.ratings ? data?.ratings : data?.rating
 const recomnedations_ai = data?.definations ?data?.definations :data.recommendation
+
+
+
+
+const totalAverageRating = data?.total_average_rating || data.total_score;
+  const hairStyleRating = Analysis.HairStyle_rating;
+
+  console.log(totalAverageRating,hairStyleRating, Analysis.Skin_Quality_rating,
+    Analysis.Facial_structure_rating)
+  // Assuming these are the four values you want to average
+
+  
+
+const num =      data?.total_average_rating || data.total_score+++Analysis.HairStyle_rating+++Analysis.Skin_Quality_rating+++Analysis.Facial_structure_rating
+
 
 const [isLoading, setIsLoading] = useState(false);
 
@@ -104,6 +154,10 @@ function FeedBack({title,prompt,titleII}){
 
   return (
     <View style={styles.container}>
+      <Image 
+      source={logo}
+      style={{width:35,height:35,marginTop:50}}
+      />
       <Text style={styles.totalRating}>Your GlowX Result</Text>
       {/* <FlatList
         data={Object.entries(Analysis).map(([feature, score]) => ({ feature, score }))}
@@ -171,8 +225,13 @@ function FeedBack({title,prompt,titleII}){
       <View style={styles.ScoreCardI}>
 
      <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:23}}>Potential</Text>
-              <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:65}}>91
+     {
+      data?.total_average_rating || data.total_score&&Analysis.HairStyle_rating&&Analysis.Skin_Quality_rating&&Analysis.Facial_structure_rating ?
+              <Text style={{color:Colors.FontColorI,fontWeight:'bold',fontSize:65}}>{((data?.total_average_rating || data.total_score+++Analysis.HairStyle_rating+++Analysis.Skin_Quality_rating+++Analysis.Facial_structure_rating) / 4).toFixed(0)}
               </Text>
+     :
+     <Text></Text>
+     }
    
    
 
@@ -197,12 +256,18 @@ function FeedBack({title,prompt,titleII}){
         keyExtractor={(item, index) => index.toString()}
       /> */}
 
-      
+      {
+        
+      }
+      {
+        Analysis.Facial_structure_rating <80 &&
 <FeedBack
 title={"Elevate Jawline"}
 prompt={`Hey this is my Face shape defination and rating defiation: ${recomnedations_ai.Face_shape_defination} rating:${Analysis.Face_shape_rating} and this is my facial structure defination and rating  defination: ${recomnedations_ai.Facial_structure_defination} rating:${Analysis.Facial_structure_rating} please provide me a detailed step by step guide to elevate my jawline and make it look more cooler and beauitful, please provide as much as information you can with proper spacing and formating`}
 titleII={"Elevate your jawline"}
 />
+      }
+
 <FeedBack
 title={"Skin Quality - Fixing Dark Spots"}
 prompt={`Hey this is my skin quality info and rating: info ${recomnedations_ai.Skin_Quality_defination} rating:${Analysis.Skin_Quality_rating} please provide me a detailed step by step guide to elevate and enhance my skin quality , suggest some natural products as well, please provide as much as information you can with proper spacing and formating`}
@@ -223,6 +288,11 @@ titleII={"Hair Color and quality"}
 
       </ScrollView>
       {/* </View> */}
+      {
+        showRating === true &&
+        <StarRatingModal />
+      }
+
 
     </View>
   );
@@ -242,6 +312,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     margin: 16,
+    marginTop:0,
     color:Colors.FontColorI
   },
   analysisContainer: {
